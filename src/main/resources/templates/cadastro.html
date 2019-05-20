@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<meta charset="UTF-8">
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>O Gigante Está de Pé</title>
+</head>
+<body>
+	<div class="container">
+		<div class="text-center">
+			<h1>Lista de locais onde teremos manifestações dia 26/05</h1>
+		</div>
+		<form action="" method="post" th:object="${cidade}" class="row">
+			<input type="hidden" class="form-control" th:field="*{id}" >
+			<div class="form-group col-md-8">
+			    <label for="exampleFormControlInput1">Cidade</label>
+			    <input type="text" class="form-control" th:field="*{name}" >
+			</div>
+			<div class="form-group col-md-4">
+				<label for="exampleFormControlSelect2">Estado</label> 
+				<select class="form-control" th:field="*{estado}">
+					<option th:value="null">Selecione um Estado</option>
+					<option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado.getNome()}"></option>
+				</select>
+			</div>
+			<div class="form-group col-md-10">
+			    <label for="exampleFormControlInput1">Local de Concentração</label>
+			    <input type="text" class="form-control"  th:field="*{localConcentracao}" >
+			</div>
+			<div class="form-group col-md-2">
+			    <label for="exampleFormControlInput1">Hora</label>
+			    <input type="time" class="form-control" th:field="*{hora}" >
+			</div>
+			<div class="col-md-12">
+             	<button class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>             	
+            </div>
+
+		</form>
+		<div>		
+			<table class="table table-sm">
+				<thead>
+					<tr>
+						<th>#Código</th>
+						<th>Cidade</th>
+						<th>Estado</th>
+						<th>Local</th>
+						<th>Hora</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="cidade : ${cidades}">
+						<td>[[${cidade.id}]]</td>
+						<td>[[${cidade.name}]]</td>
+						<td>[[${cidade.estado.getNome()}]]</td>
+						<td>[[${cidade.localConcentracao}]]</td>
+						<td>[[${cidade.hora}]]</td>
+						<td>
+							<a class="btn btn-warning" th:href="@{/cadastrar-cidade/}+${cidade.id}+'/editar'">Editar</a>
+							<a class="btn btn-danger" th:href="@{/cadastrar-cidade/}+${cidade.id}+'/deletar'">Deletar</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
