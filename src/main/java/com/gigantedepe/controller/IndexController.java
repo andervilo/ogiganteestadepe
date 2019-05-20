@@ -58,7 +58,6 @@ public class IndexController {
 	}
 	
 	@GetMapping("/teste")
-	@ResponseBody
 	public String teste() {
 		return "teste";
 	}
