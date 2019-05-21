@@ -26,8 +26,10 @@ public class IndexController {
 	@GetMapping("")
 	public String index(Model model) {
 		model.addAttribute("cidades", cidadeRepository.findAll());
-		return "inicio";
+//		return "inicio";
+		return "teste";
 	}
+	
 	
 	@GetMapping("/cadastrar-cidade")
 	public String cadastrar(Model model) {

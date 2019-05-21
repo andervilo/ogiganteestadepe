@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
- 	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
-	<link th:href="@{/css/app.css}" rel="stylesheet">
-	<title>Insert title here</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="viewport"
+	content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+<link th:href="@{/css/app.css}" rel="stylesheet">
+<title>Insert title here</title>
 </head>
 <body>
 
 	<div id="app">
-		<example-component></example-component>
+		<q-layout view="lHh Lpr fff"> <q-layout-header>
+		<q-toolbar color="secondary" inverted> <q-btn
+			flat round dense @click="drawerState = !drawerState"
+			icon="fas fa-bars"></q-btn> <q-toolbar-title>
+		Quasar App {{version}}
+		<div slot="subtitle">Running on Quasar</div>
+		</q-toolbar-title> </q-toolbar> </q-layout-header> 
+		<q-layout-drawer
+			v-model="drawerState"
+			:content-class="$q.theme === 'mat' ? 'bg-teal' : null">
+			<q-list no-border link inset-delimiter> 
+			<q-list-header class="text-white">Essential Links</q-list-header> 
+			<q-item to="/"
+				link> <q-item-main class="text-white" label="Horá"></q-item-main>
+			</q-item> 
+			<q-item to="/cidades" link> 
+				<q-item-main class="text-white" label="Cidades"></q-item-main> 
+			</q-item> 
+			<q-item to="/cidades-add" link>
+				<q-item-main class="text-white" label="Adicionar Cidade"></q-item-main>
+			</q-item> 
+			<q-item to="/cidades-edit" link> <q-item-main
+				class="text-white" label="Editar Cidade"></q-item-main> 
+			</q-item> 
+			<q-item @click.native="launchurl('/cadastrar-cidade')">
+				<q-item-side color="white" icon="fas fa-file-pdf"></q-item-side>              
+              	<q-item-main class="text-white" label="Relatório"></q-item-main>
+            </q-item>
+			</q-list> 
+			</q-layout-drawer> 
+			<q-page-container padding> 
+				<router-view></router-view> </q-page-container> 
+			</q-layout>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/quasar-framework@0.17.8/dist/umd/quasar.ie.polyfills.umd.min.js"></script>
-<!--   	<script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script> -->
-	<script th:src="@{/js/app.js}" type="text/javascript"></script>
-	<script src="https://cdn.jsdelivr.net/npm/quasar-framework@0.17.8/dist/umd/quasar.mat.umd.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/quasar-framework@0.17.8/dist/umd/i18n.pt-br.umd.min.js"></script>
-<!-- 	<script src="https://cdn.jsdelivr.net/npm/quasar-framework@0.17.8/dist/umd/icons.fontawesome.umd.min.js"></script> -->
-	
-	<script type="text/javascript">
-	  	new Vue({ 
-	  	    el: '#app'
-	  	}); 
- 	</script> 
-	
+	<script th:src="@{/js/app.js}"></script>
 </body>
 </html>
