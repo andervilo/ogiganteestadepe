@@ -14,43 +14,51 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-		<div class="col-md-8">
-		<form id="outer-form" class="row form-horizontal form"
-			th:action="@{/child}" th:object="${parent}"
-			method="post">
-				<div class="form-group col-md-12">
-				    <label for="exampleFormControlInput1">Nome Pai</label>
-				    <input type="text" class="form-control" th:field="*{name}" >
-				</div>
-				
-				<input type="hidden" th:field="*{childs[0].parent}" th:value="${parent}">
-				<div class="form-group col-md-9">
-				    <label for="exampleFormControlInput1">Nome FIlho</label>
-				    <input type="text" class="form-control" th:field="*{childs[0].name}" >
-				</div>
-				<div class="form-group col-md-3">
-					<label for="exampleFormControlInput1" style="color: #fff">Nome FIlho</label>
-					<button id="save" name="addChild" class="form-control btn btn-success btn-block">Adicionar Filho</button>
-				</div>
-					
-				<div class="col-md-12">				
-					<table th:if="${#lists.size(parent.childs) > 1}" class="table table-sm">
-						<tbody>
-							<tr th:each="item, itemStat : ${parent.childs}" th:if="${itemStat.index > 0}">
-								<th>[[${item.id}]]</th>
-								<th>[[${item.name}]]</th>
-								<th>[[${item.parent.name}]]</th>
-								<th><button type="submit" id="removeChild" name="removeChild" class="btn btn-danger" th:value="${itemStat.index}">X</button></th>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="col-md-12">
-					<button id="save" name="saveParent" class="btn btn-primary">SaveParent</button>
-				</div>
-		</form>
-		</div>
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<form id="outer-form" class="row form-horizontal form"
+					th:action="@{/child}" th:object="${parent}"
+					method="post">
+						<div class="form-group col-md-12">
+						    <label for="exampleFormControlInput1">Nome Pai</label>
+						    <input type="text" class="form-control" th:field="*{name}" >
+						</div>
+						
+						<input type="hidden" th:field="*{childs[0].parent}" th:value="${parent}">
+						<div class="form-group col-md-9">
+						    <label for="exampleFormControlInput1">Nome FIlho</label>
+						    <input type="text" class="form-control" th:field="*{childs[0].name}" >
+						</div>
+						<div class="form-group col-md-3">
+							<label for="exampleFormControlInput1" style="color: #fff">Nome FIlho</label>
+							<button id="save" name="addChild" class="form-control btn btn-success btn-block">Adicionar Filho</button>
+						</div>
+							
+						<div class="col-md-12">				
+							<table th:if="${#lists.size(parent.childs) > 1}" class="table table-sm">
+								<tbody>
+									<tr th:each="item, itemStat : ${parent.childs}" th:if="${itemStat.index > 0}">
+										<th>[[${item.id}]]</th>
+										<th>[[${item.name}]]</th>
+										<th>[[${item.parent.name}]]</th>
+										<th><button type="submit" id="removeChild" name="removeChild" class="btn btn-danger" th:value="${itemStat.index}">X</button></th>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-12">
+							<button id="save" name="saveParent" class="btn btn-primary">Salvar Pai</button>
+						</div>
+				</form>
+<!-- 				<form th:action="@{/child/delete}" method="get"> -->
+<!-- 					<div class="btn-group" role="group" aria-label="Basic example"> -->
+<!-- 						<button type="submit" id="myId" name="myId" class="btn btn-danger" value="1">Teste Delete</button> -->
+<!-- 						<button type="button" class="btn btn-success">Left</button> -->
+<!-- 						<button type="button" class="btn btn-info">Middle</button> -->
+<!-- 						<button type="button" class="btn btn-warning">Right</button> -->
+<!-- 					</div> -->
+<!-- 				</form> -->
+			</div>
 		</div>
 <!-- 		<form id="inner-form" class="form-horizontal form" -->
 <!-- 			th:action="@{/child1}" th:object="${child}" -->

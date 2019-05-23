@@ -57,7 +57,13 @@ public class TesteController {
 	public String savePrarent(@ModelAttribute Parent _parent, Model model) {
 		this.parent.getChilds().remove(0);
 		parentRepository.save(this.parent);
-		//childRepository.saveAll(this.parent.getChilds());
+		return "redirect:/child";
+	}
+	
+	@GetMapping(value="/child/delete", params= {"myId"})
+	public String delete( Model model,  final HttpServletRequest req) {
+		final Integer rowId = Integer.valueOf(req.getParameterMap().get("myId")[0]);	
+		System.out.println(rowId);
 		return "redirect:/child";
 	}
 
