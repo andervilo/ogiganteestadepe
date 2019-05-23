@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,7 +27,7 @@ public class Parent implements Serializable{
 	  private String name;
 	  
 	  @JsonIgnore	  
-	  @OneToMany(mappedBy = "parent")
+	  @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
 	  private List<Child> childs = new ArrayList<Child>();
   
 	public Long getId() {
@@ -47,13 +50,13 @@ public class Parent implements Serializable{
 	}
 	
 	public void addChild(Child child) {
-		getChilds().add(child);
 		child.setParent(this);
+		getChilds().add(child);
 	}
 
 	public void removeChild(Child child) {		
-		getChilds().remove(child);
 		child.setParent(null);
+		getChilds().remove(child);
 	}
 
 	
